@@ -25,13 +25,20 @@ namespace MyProject.Controllers
 
             return View(articles);
         }
-        public IActionResult Index()
+        public void OnGet()
         {
             var categories = _context.Categories.ToList();
             var categoriesString = string.Join(",", categories.Select(c => c.Name));
             HttpContext.Session.SetString("Categories", categoriesString);
             ViewData["Categories"] = categories;
-            return View();
+        }
+        public IActionResult Index()
+        {
+            var articles = _context.Article.ToList(); // Assuming _context is your DbContext
+            OnGet();
+            return View(articles);
+                     
+            
         }
 
 

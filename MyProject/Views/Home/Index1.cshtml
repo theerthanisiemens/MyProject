@@ -5,21 +5,31 @@
 @model IEnumerable<MyProject.Models.Article>
 
 <h2>Articles</h2>
+<div class="row">
+    <div class="col-md-6">
 
-@if (Model != null && Model.Any())
-
-{
-    <ul>
-        @foreach (var article in Model)
+        @if (Model != null && Model.Any())
 
         {
-            <li>@article.Title</li>
+            <ul>
+                @foreach (var article in Model)
+
+                {
+                    <li>@article.Title</li>
+                    <li>@article.Content</li>
+                    <hr />
+                }
+            </ul>
         }
-    </ul>
-}
 
-else
+        else
 
-{
-    <p>No articles available.</p>
-}
+        {
+            <p>No articles available.</p>
+        }
+
+    </div>
+    <div class="col-md-6">
+        <img src="~/Images/flower.jfif" />
+    </div>
+</div>
