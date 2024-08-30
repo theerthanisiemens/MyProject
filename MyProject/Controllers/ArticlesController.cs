@@ -26,6 +26,8 @@ namespace MyProject.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+      
+
         // GET: Articles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -80,9 +82,6 @@ namespace MyProject.Controllers
                 await _context.SaveChangesAsync();
                 TempData["Success"] = "Article created successfully";
                 return RedirectToAction(nameof(Index));
-            //}
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", article.CategoryId);
-            return View(article);
         }
 
 

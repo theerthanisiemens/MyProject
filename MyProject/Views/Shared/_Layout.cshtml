@@ -48,7 +48,7 @@
                                         var categoryList = categories.Split(',');
                                         foreach (var category in categoryList)
                                         {
-                                            <li><a class="dropdown-item" href="#">@category</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Home" asp-action="Index1" asp-route-categoryName="@category">@category</a></li>
                                         }
                                     }
                                     else

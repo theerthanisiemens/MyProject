@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<MyProject.Models.Article>
+
+<h2>Articles</h2>
+
+@if (Model != null && Model.Any())
+
+{
+    <ul>
+        @foreach (var article in Model)
+
+        {
+            <li>@article.Title</li>
+        }
+    </ul>
+}
+
+else
+
+{
+    <p>No articles available.</p>
+}

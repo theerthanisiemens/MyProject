@@ -17,6 +17,14 @@ namespace MyProject.Controllers
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public IActionResult Index1(string categoryName)
+        {
+            var articles = _context.Article
+                .Where(a => a.Category.Name == categoryName)
+                .ToList();
+
+            return View(articles);
+        }
         public IActionResult Index()
         {
             var categories = _context.Categories.ToList();
