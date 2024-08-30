@@ -38,9 +38,17 @@
                                 SelectCategory
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                @if (ViewData["Categories"] is List<Category> categories)
+                                {
+                                    foreach (var category in categories)
+                                    {
+                                        <li><a class="dropdown-item" href="#">@category.Name</a></li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li><a class="dropdown-item" href="#">No categories available</a></li>
+                                }
                             </ul>
                         </li>
                     </ul>

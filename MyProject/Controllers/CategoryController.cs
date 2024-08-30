@@ -19,6 +19,7 @@ namespace MyProject.Controllers
             return View(objCategoryList);
         }
 
+
         [HttpGet]
         public IActionResult Create()
         {
