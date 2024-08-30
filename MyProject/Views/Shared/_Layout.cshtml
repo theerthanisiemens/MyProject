@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -38,16 +41,20 @@
                                 SelectCategory
                             </a>
                             <ul class="dropdown-menu">
-                                @if (ViewData["Categories"] is List<Category> categories)
-                                {
-                                    foreach (var category in categories)
+                                @{
+                                    var categories = HttpContextAccessor.HttpContext.Session.GetString("Categories");
+                                    if (!string.IsNullOrEmpty(categories))
                                     {
-                                        <li><a class="dropdown-item" href="#">@category.Name</a></li>
+                                        var categoryList = categories.Split(',');
+                                        foreach (var category in categoryList)
+                                        {
+                                            <li><a class="dropdown-item" href="#">@category</a></li>
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    <li><a class="dropdown-item" href="#">No categories available</a></li>
+                                    else
+                                    {
+                                        <li><a class="dropdown-item" href="#">No categories available</a></li>
+                                    }
                                 }
                             </ul>
                         </li>

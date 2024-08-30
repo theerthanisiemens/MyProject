@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using MyProject.Data;
 using MyProject.Models;
 
@@ -15,8 +16,17 @@ namespace MyProject.Controllers
         }
         public IActionResult Index()
         {
+
             List<Category> objCategoryList = _db.Categories.ToList();
             return View(objCategoryList);
+        }
+
+        public void OnGet()
+        {
+            var categories = _db.Categories.ToList();
+            var categoriesString = string.Join(",", categories.Select(c => c.Name));
+            HttpContext.Session.SetString("Categories", categoriesString);
+            ViewData["Categories"] = categories;
         }
 
 
@@ -32,6 +42,7 @@ namespace MyProject.Controllers
             obj.Id = 0; // Ensure the Id is not set explicitly
             _db.Categories.Add(obj);
             _db.SaveChanges();
+            OnGet();
             TempData["Success"] = "Category created successfully";  
             return RedirectToAction("Index");
         }
@@ -57,6 +68,7 @@ namespace MyProject.Controllers
             obj.Id = 0; // Ensure the Id is not set explicitly
             _db.Categories.Update(obj);
             _db.SaveChanges();
+            OnGet();
             TempData["Success"] = "Category Edited successfully";
             return RedirectToAction("Index");
         }
@@ -87,6 +99,7 @@ namespace MyProject.Controllers
             }
             _db.Categories.Remove(obj);
             _db.SaveChanges();
+            OnGet();
             TempData["Success"] = "Category Deleted successfully";
             return RedirectToAction("Index");
         }
