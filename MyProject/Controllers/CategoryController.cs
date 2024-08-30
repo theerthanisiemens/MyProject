@@ -11,12 +11,13 @@ namespace MyProject.Controllers
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db) {
+        private readonly IHttpContextAccessor _context;
+        public CategoryController(ApplicationDbContext db, IHttpContextAccessor context) {
             _db = db;
+            _context = context;
         }
         public IActionResult Index()
         {
-
             List<Category> objCategoryList = _db.Categories.ToList();
             return View(objCategoryList);
         }

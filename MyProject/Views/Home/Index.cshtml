@@ -4,21 +4,30 @@
 
 @model IEnumerable<MyProject.Models.Article>
 
-
-<h2>Articles</h2>
-
-@if (Model != null && Model.Any())
+@if (User.Identity.IsAuthenticated)
 {
-    <ul>
-        @foreach (var article in Model)
-        {
-            <li>@article.Title</li>
-            <li>@article.Content</li>
-            <hr />
-        }
-    </ul>
+    <h2>Articles</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <ul>
+            @foreach (var article in Model)
+            {
+                <li>@article.Title</li>
+                <li>@article.Content</li>
+                <hr />
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No articles available.</p>
+    }
 }
 else
 {
-    <p>No articles available.</p>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
 }
