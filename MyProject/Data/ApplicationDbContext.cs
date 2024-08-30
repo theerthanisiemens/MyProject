@@ -23,5 +23,6 @@ namespace MyProject.Data
                 new Category { Id = 4, Name = "Productivity" }
             );
         }
+        public DbSet<MyProject.Models.Article> Article { get; set; } = default!;
     }
 }
